@@ -19,10 +19,19 @@ services:
     networks:
       - rsa-network
 
+  couchdb-service:
+    image: moratello/couchdb:0.0.1-SNAPSHOT   
+    restart: always
+    scale: 2
+    depends_on:
+      - discovery-service
+    networks:
+      - rsa-network
+
   rsa-service:
     image: moratello/rsa-decryption:0.0.1-SNAPSHOT   
     ports:
-      - "8000:8000"
+      - "9000:9000"
     restart: always
     depends_on:
       - discovery-service
