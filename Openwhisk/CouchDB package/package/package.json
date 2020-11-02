@@ -1,0 +1,7 @@
+{
+  "name": "couchdb",
+  "main": "index.js",
+  "dependencies": {
+    "@cloudant/cloudant": "4.3.0"
+  }
+}
