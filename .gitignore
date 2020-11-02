@@ -24,3 +24,5 @@ hs_err_pid*
 
 # Mac os
 .DS_Store
+
+node_modules.*
