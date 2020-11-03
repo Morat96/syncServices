@@ -1,0 +1,7 @@
+{
+  "name": "benchdb",
+  "main": "benchRUD.js",
+  "dependencies": {
+    "rword": "3.1.2"
+  }
+}
