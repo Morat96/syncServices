@@ -70,19 +70,4 @@ function main(args) {
     });
 }
 
-/**
-* Get an array composed of random values
-* @param size size of the array to generate
-* @param max generate numbers between 0 and (max - 1)
-* @returns array of random numbers
-*/
-function getRandomList(size, max) {
-    var arr = [];
-    while(arr.length < size){
-        var r = Math.floor(Math.random() * max);
-        if(arr.indexOf(r) === -1) arr.push(r);
-    }
-    return arr;
-}
-
 exports.main = main;

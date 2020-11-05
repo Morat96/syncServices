@@ -1,6 +1,6 @@
 /**
  * A benchmark for CouchDB databases.
- * This function creates a number of random documents and executes a series of sorts to them.
+ * This function updates a number of random documents and executes a series of sorts to them.
  * @author Matteo Moratello 
  */
 

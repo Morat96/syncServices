@@ -12,7 +12,7 @@ function main(params) {
 
     var db_selected;
 
-    // obtain the number of documents to delete
+    // obtain the database name from the path
     if(params.__ow_path && params.__ow_path.length) {
         var parts = params.__ow_path.split('/');
         if (parts.length != 4) {
