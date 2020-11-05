@@ -1,0 +1,7 @@
+{
+  "name": "benchdb",
+  "main": "deleteBench.js",
+  "dependencies": {
+    "nano": "8.2.3"
+  }
+}

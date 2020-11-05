@@ -1,0 +1,196 @@
+{
+    "swagger": "2.0",
+    "basePath": "/benchjs",
+    "info": {
+        "title": "BenchDB",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/benchdb/{dbname}": {
+            "post": {
+                "operationId": "postBenchjsDbname",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "createBench",
+                    "namespace": "guest",
+                    "package": "",
+                    "url": "https://192.168.30.151:31001/api/v1/web/guest/default/createBench.http"
+                }
+            }
+        },
+        "/benchdb/{dbname}/{count}": {
+            "put": {
+                "operationId": "putBenchjsDbnameCount",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "path",
+                        "description": "Default description for 'count'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "updateBench",
+                    "namespace": "guest",
+                    "package": "",
+                    "url": "https://192.168.30.151:31001/api/v1/web/guest/default/updateBench.http"
+                }
+            },
+            "delete": {
+                "operationId": "deleteBenchjsDbnameCount",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "path",
+                        "description": "Default description for 'count'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "deleteBench",
+                    "namespace": "guest",
+                    "package": "",
+                    "url": "https://192.168.30.151:31001/api/v1/web/guest/default/deleteBench.http"
+                }
+            }
+        },
+        "/benchdb/query/{dbname}/{query}": {
+            "get": {
+                "operationId": "getBenchjsDbnameQuery",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "query",
+                        "in": "path",
+                        "description": "Default description for 'query'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "readBench",
+                    "namespace": "guest",
+                    "package": "",
+                    "url": "https://192.168.30.151:31001/api/v1/web/guest/default/readBench.http"
+                }
+            }
+        }
+    },
+    "x-ibm-configuration": {
+        "assembly": {
+            "execute": [
+                {
+                    "operation-switch": {
+                        "case": [
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://192.168.30.151:31001/api/v1/web/guest/default/readBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "getBenchjsDbnameQuery"
+                                ]
+                            },
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://192.168.30.151:31001/api/v1/web/guest/default/deleteBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "deleteBenchjsDbnameCount"
+                                ]
+                            },
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://192.168.30.151:31001/api/v1/web/guest/default/createBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "postBenchjsDbname"
+                                ]
+                            },
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://192.168.30.151:31001/api/v1/web/guest/default/updateBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "putBenchjsDbnameCount"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "cors": {
+            "enabled": true
+        }
+    }
+}

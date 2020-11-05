@@ -1,0 +1,8 @@
+{
+  "name": "benchdb",
+  "main": "createBench.js",
+  "dependencies": {
+    "rword": "3.1.2",
+    "nano": "8.2.3"
+  }
+}
