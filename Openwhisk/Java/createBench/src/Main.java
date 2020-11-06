@@ -35,14 +35,14 @@ public class Main {
         if (args.has("__ow_path")) {
             path = args.getAsJsonPrimitive("__ow_path").getAsString();
             split = path.split("/");
-            if (split.length != 2) {
+            if (split.length != 4) {
                 response.addProperty("statusCode", 400);
                 response.add("headers", header);
                 bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}");
                 response.add("body", bodyError);
                 return response;
             }
-            db_selected = split[1];
+            db_selected = split[3];
         }
 
         // parameters

@@ -37,15 +37,15 @@ public class Main {
         if (args.has("__ow_path")) {
             path = args.getAsJsonPrimitive("__ow_path").getAsString();
             split = path.split("/");
-            if (split.length != 3) {
+            if (split.length != 5) {
                 response.addProperty("statusCode", 400);
                 response.add("headers", header);
                 bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}/{count}");
                 response.add("body", bodyError);
                 return response;
             }
-            db_selected = split[1];
-            count = Integer.parseInt(split[2]);
+            db_selected = split[3];
+            count = Integer.parseInt(split[4]);
         }
 
         // parameters

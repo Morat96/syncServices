@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 /**
  * A benchmark for CouchDB databases.
@@ -26,7 +27,7 @@ public class Main {
         String path = "";
         String[] split = null;
         String db_selected = "";
-        int count = 0;
+        String query = "";
 
         JsonObject response = new JsonObject();
         JsonObject header = new JsonObject();
@@ -37,15 +38,15 @@ public class Main {
         if (args.has("__ow_path")) {
             path = args.getAsJsonPrimitive("__ow_path").getAsString();
             split = path.split("/");
-            if (split.length != 3) {
+            if (split.length != 6) {
                 response.addProperty("statusCode", 400);
                 response.add("headers", header);
-                bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}/{count}");
+                bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}/{query}");
                 response.add("body", bodyError);
                 return response;
             }
-            db_selected = split[1];
-            count = Integer.parseInt(split[2]);
+            db_selected = split[4];
+            query = split[5];
         }
         
         // CouchDB server connection
@@ -73,63 +74,36 @@ public class Main {
         catch(Exception e) {
             e.printStackTrace();
         }
-        
-        Map<String,String> allDocIdsAndRevs = null;
 
+        List<Doc> allDocs = null;
+
+        // Obtain all docs
         try {
-            allDocIdsAndRevs = db.getAllDocsRequestBuilder().build().getResponse().getIdsAndRevs();
+            allDocs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(Doc.class);
         }
         catch(Exception e) {
             e.printStackTrace();
         }
 
         // number of documents
-        int docsCount = allDocIdsAndRevs.size();
-
-        List<String> ids = new ArrayList<String>();
-        List<String> revs = new ArrayList<String>();
-
-        for (String i : allDocIdsAndRevs.keySet()) {
-            ids.add(i);
-            revs.add(allDocIdsAndRevs.get(i));
-        }
-
-        if (count > docsCount) {
-            response.addProperty("statusCode", 400);
-            response.add("headers", header);
-            bodyError.addProperty("message", "The number of docs to delete is " + count + ", but the docs in the database '" + db_selected + "' are " + docsCount);
-            response.add("body", bodyError);
-            return response;
-        }
-
-        List<Integer> list = getRandomList(count, docsCount);
-
-        List<JsonObject> docsToDelete = new ArrayList<JsonObject>();
-
-        // create the object
-        for (int i = 0; i < count; i++) {
-            JsonObject resp = new JsonObject();
-            resp.addProperty("_id", ids.get(list.get(i)));
-            resp.addProperty("_rev", revs.get(list.get(i)));
-            resp.addProperty("_deleted", true);
-            docsToDelete.add(resp);
-        }
-
-        // delete documents from the database
-        List<Response> responses = db.bulk(docsToDelete);
-
-        long end = System.currentTimeMillis();
-        System.out.println("Time for computing sorting: " + (end - start) + " ms");
+        int docsCount = allDocs.size();
 
         JsonArray DocsArray = new JsonArray();
-        for (int i = 0; i < responses.size(); i++) {
 
-            JsonObject resp = new JsonObject();
-            resp.addProperty("_id", responses.get(i).getId());
-            resp.addProperty("_rev", responses.get(i).getRev());
-            DocsArray.add(resp);
+        // Make the query searching for documents which contain the word 'query'
+        for (int i = 0; i < docsCount; i++) {
+            if(allDocs.get(i).getContent() != null && allDocs.get(i).getContent().contains(query)){
+                JsonObject resp = new JsonObject();
+                resp.addProperty("id", allDocs.get(i).getId());
+                resp.addProperty("rev", allDocs.get(i).getRev());
+                resp.addProperty("content", allDocs.get(i).getContent());
+                DocsArray.add(resp);
+            }
         }
-
+        
+        long end = System.currentTimeMillis();
+        System.out.println("Time for computing sorting: " + (end - start) + " ms");
+        
         response.addProperty("statusCode", 200);
         response.add("headers", header);
 
