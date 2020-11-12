@@ -6,7 +6,6 @@
 
 //var rword = require('rword');
 var openwhisk = require('openwhisk');
-const nano = require('nano')('https://7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix:3519a078d03db2a98c59f7541c935dda799d990d0f3a4c91e891f4bb34bb7991@7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix.cloudantnosqldb.appdomain.cloud');
 
 function main(args) {
 
@@ -40,6 +39,10 @@ function main(args) {
 
     var d = new Date();
     var start = d.getTime();
+
+    var cloudantUrl = "https://" + params.username + ":" + params.password + "@" + params.host;
+
+    const nano = require('nano')(cloudantUrl);
 
     // select database to use
     const couchdb = nano.db.use(db_selected);

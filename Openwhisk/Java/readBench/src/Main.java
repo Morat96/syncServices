@@ -49,12 +49,26 @@ public class Main {
             query = split[5];
         }
         
+        String host = "";
+        String username = "";
+        String password = "";
+        
+        if (args.has("host")) {
+            host = args.getAsJsonPrimitive("host").getAsString();
+        }
+        if (args.has("username")) {
+            username = args.getAsJsonPrimitive("username").getAsString();
+        }
+        if (args.has("password")) {
+            password = args.getAsJsonPrimitive("password").getAsString();
+        }
+        
         // CouchDB server connection
         CloudantClient client = null;
         try {
-            client = ClientBuilder.url(new URL("https://7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix.cloudantnosqldb.appdomain.cloud"))
-                    .username("7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix")
-                    .password("3519a078d03db2a98c59f7541c935dda799d990d0f3a4c91e891f4bb34bb7991")
+            client = ClientBuilder.url(new URL(host))
+                    .username(username)
+                    .password(password)
                     .build();
         } catch (MalformedURLException e) {
             e.printStackTrace();

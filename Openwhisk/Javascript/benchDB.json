@@ -26,7 +26,7 @@
                 "x-openwhisk": {
                     "action": "createBench",
                     "namespace": "guest",
-                    "package": "",
+                    "package": "benchdbJS",
                     "url": "https://192.168.30.151:31001/api/v1/web/guest/default/createBench.http"
                 }
             }
@@ -58,7 +58,7 @@
                 "x-openwhisk": {
                     "action": "updateBench",
                     "namespace": "guest",
-                    "package": "",
+                    "package": "benchdbJS",
                     "url": "https://192.168.30.151:31001/api/v1/web/guest/default/updateBench.http"
                 }
             },
@@ -88,7 +88,7 @@
                 "x-openwhisk": {
                     "action": "deleteBench",
                     "namespace": "guest",
-                    "package": "",
+                    "package": "benchdbJS",
                     "url": "https://192.168.30.151:31001/api/v1/web/guest/default/deleteBench.http"
                 }
             }
@@ -120,7 +120,7 @@
                 "x-openwhisk": {
                     "action": "readBench",
                     "namespace": "guest",
-                    "package": "",
+                    "package": "benchdbJS",
                     "url": "https://192.168.30.151:31001/api/v1/web/guest/default/readBench.http"
                 }
             }
