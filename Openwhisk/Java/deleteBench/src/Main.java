@@ -51,9 +51,9 @@ public class Main {
         // CouchDB server connection
         CloudantClient client = null;
         try {
-            client = ClientBuilder.url(new URL("http://192.168.30.151:8081"))
-                    .username("admin")
-                    .password("sX5IWFOsWX3BKClsxB8G")
+            client = ClientBuilder.url(new URL("https://7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix.cloudantnosqldb.appdomain.cloud"))
+                    .username("7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix")
+                    .password("3519a078d03db2a98c59f7541c935dda799d990d0f3a4c91e891f4bb34bb7991")
                     .build();
         } catch (MalformedURLException e) {
             e.printStackTrace();
