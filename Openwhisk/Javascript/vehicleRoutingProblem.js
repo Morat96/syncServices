@@ -1,8 +1,8 @@
 /**
- * A benchmark for CouchDB databases.
- * This function creates a number of random documents and executes a series of sorts to them.
+ * Vehicle Routing Problem solver.
  * @author Matteo Moratello 
  */
+
 function main(params) {
 
     var vns = false;
