@@ -89,12 +89,6 @@ public class Function {
         //return response;
 
         return request.createResponseBuilder(HttpStatus.OK).body(response).build();
-
-        /*if (name == null) {
-            return request.createResponseBuilder(HttpStatus.BAD_REQUEST).body("Please pass a name on the query string or in the request body").build();
-        } else {
-           
-        }*/
     }
 
     //calculate multiplicative inverse of a%n using the extended euclidean GCD algorithm
