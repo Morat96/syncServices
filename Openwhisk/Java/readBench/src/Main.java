@@ -2,6 +2,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.cloudant.client.api.*;
 import com.cloudant.client.api.model.Response;
+import com.cloudant.client.org.lightcouch.NoDocumentException;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.net.MalformedURLException;
@@ -85,9 +86,9 @@ public class Main {
         try {
             db = client.database(db_selected, false);
         }
-        catch(Exception e) {
+        catch (NoDocumentException e) {
             e.printStackTrace();
-        }
+        };
 
         List<Doc> allDocs = null;
 

@@ -93,7 +93,25 @@ function main(args) {
                     "time": time + ' ms'
                 }
             }
+        }).catch((error) => {
+            console.log('Error: ' + error.message);
+            return { 
+                statusCode: 400,
+                headers: { 'Content-Type': 'application/json' },
+                body: {
+                    "error": error
+                }
+            }
         });
+    }).catch((error) => {
+        console.log('Error: ' + error.message);
+        return { 
+            statusCode: 400,
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                "error": error
+            }
+        }
     });
 }
 

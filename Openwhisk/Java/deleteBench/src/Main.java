@@ -2,6 +2,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.cloudant.client.api.*;
 import com.cloudant.client.api.model.Response;
+import com.cloudant.client.org.lightcouch.NoDocumentException;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.net.MalformedURLException;
@@ -84,9 +85,9 @@ public class Main {
         try {
             db = client.database(db_selected, false);
         }
-        catch(Exception e) {
+        catch (NoDocumentException e) {
             e.printStackTrace();
-        }
+        };
         
         Map<String,String> allDocIdsAndRevs = null;
 
@@ -132,6 +133,15 @@ public class Main {
         // delete documents from the database
         List<Response> responses = db.bulk(docsToDelete);
 
+        JsonObject body = new JsonObject();
+        if (responses.size() != 0 && responses.get(0).getError() != null) {
+            response.addProperty("statusCode", responses.get(0).getStatusCode());
+            response.add("headers", header);
+            body.addProperty("reason", responses.get(0).getReason());
+            response.add("body", body);
+            return response;
+        }
+
         long end = System.currentTimeMillis();
         System.out.println("Time for computing sorting: " + (end - start) + " ms");
 
@@ -147,7 +157,6 @@ public class Main {
         response.addProperty("statusCode", 200);
         response.add("headers", header);
 
-        JsonObject body = new JsonObject();
         body.add("docs", DocsArray);
         body.addProperty("time", (end - start) + " ms");
         response.add("body", body);
