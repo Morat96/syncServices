@@ -1,0 +1,196 @@
+{
+    "swagger": "2.0",
+    "basePath": "/benchjs",
+    "info": {
+        "title": "BenchDBjs",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/benchdb/query/{dbname}/{query}": {
+            "get": {
+                "operationId": "getBenchdbQueryDbnameQuery",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "query",
+                        "in": "path",
+                        "description": "Default description for 'query'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "readBench",
+                    "namespace": "moratellomatteo@libero.it_dev",
+                    "package": "benchdbJS",
+                    "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/readBench.http"
+                }
+            }
+        },
+        "/benchdb/{dbname}": {
+            "post": {
+                "operationId": "postBenchdbDbname",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "createBench",
+                    "namespace": "moratellomatteo@libero.it_dev",
+                    "package": "benchdbJS",
+                    "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/createBench.http"
+                }
+            }
+        },
+        "/benchdb/{dbname}/{count}": {
+            "put": {
+                "operationId": "putBenchdbDbnameCount",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "path",
+                        "description": "Default description for 'count'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "updateBench",
+                    "namespace": "moratellomatteo@libero.it_dev",
+                    "package": "benchdbJS",
+                    "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/updateBench.http"
+                }
+            },
+            "delete": {
+                "operationId": "deleteBenchdbDbnameCount",
+                "parameters": [
+                    {
+                        "name": "dbname",
+                        "in": "path",
+                        "description": "Default description for 'dbname'",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "count",
+                        "in": "path",
+                        "description": "Default description for 'count'",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Default response"
+                    }
+                },
+                "x-openwhisk": {
+                    "action": "deleteBench",
+                    "namespace": "moratellomatteo@libero.it_dev",
+                    "package": "benchdbJS",
+                    "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/deleteBench.http"
+                }
+            }
+        }
+    },
+    "x-ibm-configuration": {
+        "assembly": {
+            "execute": [
+                {
+                    "operation-switch": {
+                        "case": [
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/readBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "getBenchdbQueryDbnameQuery"
+                                ]
+                            },
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/createBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "postBenchdbDbname"
+                                ]
+                            },
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/updateBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "putBenchdbDbnameCount"
+                                ]
+                            },
+                            {
+                                "execute": [
+                                    {
+                                        "invoke": {
+                                            "target-url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/moratellomatteo@libero.it_dev/benchdbJS/deleteBench.http$(request.path)",
+                                            "verb": "keep"
+                                        }
+                                    }
+                                ],
+                                "operations": [
+                                    "deleteBenchdbDbnameCount"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "cors": {
+            "enabled": true
+        }
+    }
+}
