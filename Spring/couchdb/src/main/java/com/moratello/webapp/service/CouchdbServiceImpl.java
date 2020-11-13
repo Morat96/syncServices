@@ -11,6 +11,7 @@ import com.moratello.webapp.entity.CouchdbTestResultQuery;
 import com.google.gson.JsonObject;
 import com.cloudant.client.api.*;
 import com.cloudant.client.api.model.Response;
+import com.cloudant.client.org.lightcouch.NoDocumentException;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.net.MalformedURLException;
@@ -83,12 +84,23 @@ public class CouchdbServiceImpl implements CouchdbService {
 
         }
         
+        Database db = null;
+
         // Get a Database instance
-        Database db = client.database(dbname, false);
+        try {
+            db = client.database(dbname, false);
+        }
+        catch (NoDocumentException e) {
+            e.printStackTrace();
+        };
         
         logger.info("example_db found");
 
         List<Response> responses = db.bulk(newDocs);
+
+        if (responses.size() != 0 && responses.get(0).getError() != null) {
+            return new CouchdbTestResult();
+        }
 
         long end = System.currentTimeMillis();
         logger.info("Time for computing sorting: " + (end - start) + " ms");
@@ -122,14 +134,14 @@ public class CouchdbServiceImpl implements CouchdbService {
         long start = System.currentTimeMillis();
 
         Database db = null;
-        
+
         // Get a Database instance
         try {
             db = client.database(dbname, false);
         }
-        catch(Exception e) {
+        catch (NoDocumentException e) {
             e.printStackTrace();
-        }
+        };
         
         Map<String,String> allDocIdsAndRevs = null;
 
@@ -170,6 +182,10 @@ public class CouchdbServiceImpl implements CouchdbService {
 
         // delete documents from the database
         List<Response> responses = db.bulk(docsToDelete);
+
+        if (responses.size() != 0 && responses.get(0).getError() != null) {
+            return new CouchdbTestResult();
+        }
 
         long end = System.currentTimeMillis();
         System.out.println("Time for computing sorting: " + (end - start) + " ms");
@@ -235,9 +251,9 @@ public class CouchdbServiceImpl implements CouchdbService {
             // Get a Database instance
             db = client.database(dbname, false);
         }
-        catch(Exception e) {
+        catch (NoDocumentException e) {
             e.printStackTrace();
-        }
+        };
 
         Map<String,String> allDocIdsAndRevs = null;
 
@@ -275,6 +291,10 @@ public class CouchdbServiceImpl implements CouchdbService {
 
         List<Response> responses = db.bulk(newDocs);
 
+        if (responses.size() != 0 && responses.get(0).getError() != null) {
+            return new CouchdbTestResult();
+        }
+
         long end = System.currentTimeMillis();
         System.out.println("Time for computing sorting: " + (end - start) + " ms");
            
@@ -311,9 +331,9 @@ public class CouchdbServiceImpl implements CouchdbService {
         try {
             db = client.database(dbname, false);
         }
-        catch(Exception e) {
+        catch (NoDocumentException e) {
             e.printStackTrace();
-        }
+        };
 
         List<Doc> allDocs = null;
 

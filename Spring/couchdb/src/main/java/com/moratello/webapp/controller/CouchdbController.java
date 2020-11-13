@@ -42,6 +42,8 @@ public class CouchdbController {
 		logger.info("**********************************************"); 
 		
 		CouchdbTestResult result = couchdbService.createDocs(dbname, size, ndocs, sorts);
+
+		if (result == null) return new ResponseEntity<CouchdbTestResult>(result, HttpStatus.REQUEST_TIMEOUT);
 		
 		return new ResponseEntity<CouchdbTestResult>(result, HttpStatus.OK);
 
@@ -58,6 +60,8 @@ public class CouchdbController {
 		logger.info("***********************************************"); 
 		
 		CouchdbTestResult result = couchdbService.deleteDocs(dbname, count);
+
+		if (result == null) return new ResponseEntity<CouchdbTestResult>(result, HttpStatus.REQUEST_TIMEOUT);
 		
 		return new ResponseEntity<CouchdbTestResult>(result, HttpStatus.OK);
 		
@@ -77,6 +81,8 @@ public class CouchdbController {
 		logger.info("***********************************************"); 
 		
 		CouchdbTestResult result = couchdbService.updateDocs(dbname, count, size, sorts);
+
+		if (result == null) return new ResponseEntity<CouchdbTestResult>(result, HttpStatus.REQUEST_TIMEOUT);
 		
 		return new ResponseEntity<CouchdbTestResult>(result, HttpStatus.OK);
 	}
