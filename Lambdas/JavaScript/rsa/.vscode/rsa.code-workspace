@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"name": "rsa",
+			"path": "/Users/matteomoratello/Desktop/syncServices/Lambdas/JavaScript/rsa"
+		}
+	],
+	"launch": {
+		"configurations": [
+			{
+				"type": "aws-sam",
+				"request": "direct-invoke",
+				"name": "rsa:app.lambdaHandler (nodejs10.x)",
+				"invokeTarget": {
+					"target": "code",
+					"projectRoot": "rsa/hello-world",
+					"lambdaHandler": "app.lambdaHandler"
+				},
+				"lambda": {
+					"runtime": "nodejs10.x",
+					"payload": {"json": {
+						"n" : "68561013233270273",
+						"e" : "65537",
+						"cipher" : "1235"
+					}},
+					"environmentVariables": {}
+				}
+			},
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "Launch Program",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/rsa/hello-world/app.js"
+			}
+		]
+	}
+}
