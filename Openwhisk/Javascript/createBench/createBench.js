@@ -78,7 +78,7 @@ function main(params) {
     for (var doc = 0; doc < ndocs; doc++) {
         
         // create a document with random words of size "size"
-        words = rword.rword.generate(size);
+        var words = rword.rword.generate(size);
 
         if (sorts > 1) {
             // some sorting of documents

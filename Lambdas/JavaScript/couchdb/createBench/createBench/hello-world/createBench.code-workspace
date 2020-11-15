@@ -1,0 +1,43 @@
+{
+	"folders": [
+		{
+			"name": "createBench",
+			"path": "/Users/matteomoratello/Desktop/syncServices/Lambdas/JavaScript/couchdb/createBench"
+		}
+	],
+	"launch": {
+		"configurations": [
+			{
+				"type": "aws-sam",
+				"request": "direct-invoke",
+				"name": "createBench:app.lambdaHandler (nodejs10.x)",
+				"invokeTarget": {
+					"target": "code",
+					"projectRoot": "createBench/hello-world",
+					"lambdaHandler": "app.lambdaHandler"
+				},
+				"lambda": {
+					"runtime": "nodejs10.x",
+					"payload": {
+						"json": {"key": "value"}
+					},
+					"environmentVariables": {},
+				}
+			},
+			{
+				"type": "aws-sam",
+				"request": "direct-invoke",
+				"name": "createBench:HelloWorldFunction (nodejs10.x)",
+				"invokeTarget": {
+					"target": "template",
+					"templatePath": "createBench/template.yaml",
+					"logicalId": "HelloWorldFunction"
+				},
+				"lambda": {
+					"payload": {},
+					"environmentVariables": {}
+				}
+			}
+		]
+	}
+}
