@@ -2,6 +2,8 @@
 // const url = 'http://checkip.amazonaws.com/';
 let response;
 
+var rword = require('rword');
+
 /**
  *
  * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
@@ -17,14 +19,67 @@ let response;
 exports.lambdaHandler = async (event, context) => {
     try {
 
+        // parameters
         console.log(event['pathParameters']['dbname']);
         console.log(event['pathParameters']['count']);
+        console.log(event['queryStringParameters']['size']);
+        console.log(event['queryStringParameters']['sorts']);
 
+        if (!event['queryStringParameters']['size']) {
+            return {
+                'statusCode': 400,
+                'body': JSON.stringify({
+                    message: "The parameter 'size' must be defined!"
+                })
+            };
+        }
+
+        if (!event['queryStringParameters']['sorts']) {
+            return {
+                'statusCode': 400,
+                'body': JSON.stringify({
+                    message: "The parameter 'sorts' must be defined!"
+                })
+            };
+        }
+
+        // parameters
+        var size = event['queryStringParameters']['size'];
+        var sorts = event['queryStringParameters']['sorts'];
         var dbname = event['pathParameters']['dbname'];
-        var size = event['pathParameters']['count'];
+        var count = event['pathParameters']['count'];
 
         var d = new Date();
         var start = d.getTime();
+
+        //var all_docs = '{ "docs" : ['; 
+        var all_docs = { "docs" : []};
+
+        // number of documents 
+        for (var doc = 0; doc < count; doc++) {
+            
+            // create a document with random words of size "size"
+            var words = rword.rword.generate(size);
+
+            if (sorts > 1) {
+                // some sorting of documents
+                for (var i = 0; i < sorts - 1; i++) {
+                    // do sort
+                    words.sort();
+                    // do shuffle
+                    shuffle(words);
+                }
+            }
+
+            words.sort();
+
+            var content = words.join(' ');
+
+            all_docs.docs[doc] = {};
+            all_docs.docs[doc].content = content;
+        }
+
+        console.log(all_docs);
 
         var cloudantUrl = "https://7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix:3519a078d03db2a98c59f7541c935dda799d990d0f3a4c91e891f4bb34bb7991@7ec84ee2-f691-4edb-a024-11e71e1153a8-bluemix.cloudantnosqldb.appdomain.cloud";
 
@@ -39,32 +94,27 @@ exports.lambdaHandler = async (event, context) => {
             // number of documents
             var docsCount = body.total_rows;
 
-            if (size > docsCount) {
+            if (count > docsCount) {
                 return {
                     statusCode: 400,
                     headers: { 'Content-Type': 'application/json' },
                     body: {
-                        "message": "The number of docs to delete is " + size + ", but the docs in the database '" + dbname + "' are " + docsCount
+                        "message": "The number of docs to delete is " + count + ", but the docs in the database '" + dbname + "' are " + docsCount
                     }
                 };
             }
 
             // select a random list of indices
-            var list = getRandomList(size, docsCount);
-
-            var docToDelete;
-            docToDelete = { "docs" : []};
+            var list = getRandomList(count, docsCount);
 
             // create the object
-            for (var i = 0; i < size; i++) {
-                docToDelete.docs[i] = {};
-                docToDelete.docs[i]._id = body.rows[list[i]].id;
-                docToDelete.docs[i]._rev = body.rows[list[i]].value.rev;
-                docToDelete.docs[i]._deleted = true;
+            for (var i = 0; i < count; i++) {
+                all_docs.docs[i]._id = body.rows[list[i]].id;
+                all_docs.docs[i]._rev = body.rows[list[i]].value.rev;
             }
 
             // delete documents from the database
-            return couchdb.bulk(docToDelete).then((body) => {
+            return couchdb.bulk(all_docs).then((body) => {
 
                 d = new Date();
                 var end = d.getTime();
@@ -103,8 +153,15 @@ exports.lambdaHandler = async (event, context) => {
         console.log(err);
         return err;
     }
-
 };
+
+/**
+* Shuffle an array
+* @param array array of string
+*/
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+}
 
 /**
 * Get an array composed of random values
