@@ -18,14 +18,14 @@ exports.lambdaHandler = async (event, context) => {
     try {
         // const ret = await axios(url);
 
-        console.log(event['n']);
-        console.log(event['e']);
-        console.log(event['cipher']);
+        console.log(event['queryStringParameters']['n']);
+        console.log(event['queryStringParameters']['e']);
+        console.log(event['queryStringParameters']['cipher']);
 
         // arguments n, e, cipher
-        var n_ = event['n'] || '';
-        var e_ = event['e'] || '';
-        var cipher_ = event['cipher'] || '';
+        var n_ = event['queryStringParameters']['n'] || '';
+        var e_ = event['queryStringParameters']['e'] || '';
+        var cipher_ = event['queryStringParameters']['cipher'] || '';
 
         // cast parameters to BigInt
         var n = BigInt(n_);
@@ -50,7 +50,13 @@ exports.lambdaHandler = async (event, context) => {
         // check if N is a coprime number
         if (factorization.length != 2) {
             console.log("N is not coprime number!");
-            return {'Error': 'N is not coprime number!'};
+            return {
+                'statusCode': 400,
+                'body': JSON.stringify({
+                    message: 'N is not coprime number!',
+                    // location: ret.data.trim()
+                })
+            };
         }
 
         var p = factorization[0];
@@ -77,6 +83,7 @@ exports.lambdaHandler = async (event, context) => {
             'd': d.toString()
         }
 
+        
         response = {
             'statusCode': 200,
             'body': body
@@ -86,7 +93,7 @@ exports.lambdaHandler = async (event, context) => {
         console.log(err);
         return err;
     }
-
+    
     return response
 };
 
