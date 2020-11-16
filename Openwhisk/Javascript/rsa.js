@@ -19,13 +19,13 @@ function main(args) {
 
     console.log("Cripted Message: " + cipher);
 
-    var d = new Date();
-    var start = d.getTime();
+    var date = new Date();
+    var start = date.getTime();
 
     var factorization = tdFactors(n);
 
-    d = new Date();
-    var end = d.getTime();
+    date = new Date();
+    var end = date.getTime();
     console.log("Time for computing factorization: " + (end - start) + " ms");
 
     // check if N is a coprime number
