@@ -49,7 +49,7 @@ exports.rsa = (req, res) => {
   // check if N is a coprime number
   if (factorization.length != 2) {
       console.log("N is not coprime number!");
-      res.status(500).json({error: 'N is not coprime number!'});
+      return res.status(500).json({error: 'N is not coprime number!'});
   }
 
   var p = factorization[0];
@@ -76,7 +76,7 @@ exports.rsa = (req, res) => {
       'd': d.toString()
   };
 
-  res.status(200).json(output);
+  return res.status(200).json(output);
   
   };
 

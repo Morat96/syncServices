@@ -1,0 +1,9 @@
+{
+  "name": "benchdb",
+  "main": "index.js",
+  "dependencies": {
+    "rword": "3.1.2",
+    "nano": "8.2.3",
+    "@google-cloud/functions-framework": "1.7.1"
+  }
+}
