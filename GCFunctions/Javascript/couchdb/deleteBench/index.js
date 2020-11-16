@@ -1,7 +1,7 @@
 /**
  * A benchmark for CouchDB databases.
- * This function creates a number of random documents and executes a series of sorts to them.
- * @author Matteo Moratello 
+ * This function deletes a number of documents from a CouchDB database at random.
+ * @author Matteo Moratello
  */
 
 var rword = require('rword');
