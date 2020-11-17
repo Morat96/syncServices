@@ -1,6 +1,5 @@
 # Azure Functions
 ## Java
----
 ### RSA Decryption
 ```
 https://rsajava.azurewebsites.net/api/rsa
