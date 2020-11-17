@@ -1,6 +1,5 @@
 # Openwhisk IBM Functions
 ## Java
----
 ### RSA Decryption
 ```
 https://service.eu.apiconnect.ibmcloud.com/gws/apigateway/api/f41ddfcced3ac2255a3c599ca51140bf9130534da8fcf791fb5c25a0e7d09f98/rsa/java
