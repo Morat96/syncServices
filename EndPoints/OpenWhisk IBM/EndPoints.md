@@ -1,4 +1,4 @@
-# Openwhisk IBM Functions
+# OpenWhisk IBM Functions
 ## Java
 ### RSA Decryption
 ```
