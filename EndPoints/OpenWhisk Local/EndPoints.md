@@ -1,6 +1,5 @@
 # Openwhisk Local Synclab
 ## Java
----
 ### RSA Decryption
 ```
 https://192.168.30.151:31001/api/23bc46b1-71f6-4ed5-8c54-816aa4f8c502/rsa/java
