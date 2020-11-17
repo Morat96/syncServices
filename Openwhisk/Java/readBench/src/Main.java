@@ -40,7 +40,7 @@ public class Main {
             path = args.getAsJsonPrimitive("__ow_path").getAsString();
             split = path.split("/");
             if (split.length != 6) {
-                response.addProperty("statusCode", 400);
+                response.addProperty("statusCode", 500);
                 response.add("headers", header);
                 bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}/{query}");
                 response.add("body", bodyError);

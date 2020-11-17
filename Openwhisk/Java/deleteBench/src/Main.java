@@ -39,7 +39,7 @@ public class Main {
             path = args.getAsJsonPrimitive("__ow_path").getAsString();
             split = path.split("/");
             if (split.length != 5) {
-                response.addProperty("statusCode", 400);
+                response.addProperty("statusCode", 500);
                 response.add("headers", header);
                 bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}/{count}");
                 response.add("body", bodyError);
@@ -110,7 +110,7 @@ public class Main {
         }
 
         if (count > docsCount) {
-            response.addProperty("statusCode", 400);
+            response.addProperty("statusCode", 500);
             response.add("headers", header);
             bodyError.addProperty("message", "The number of docs to delete is " + count + ", but the docs in the database '" + db_selected + "' are " + docsCount);
             response.add("body", bodyError);

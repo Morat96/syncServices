@@ -16,7 +16,7 @@ function main(params) {
         var parts = params.__ow_path.split('/');
         if (parts.length != 5) {
             return {
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "message": "The path must be: ../updateBench/{dbname}/{count}"
@@ -28,7 +28,7 @@ function main(params) {
     }
     else {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The path must be: ../updateBench/{dbname}/{count}"
@@ -38,7 +38,7 @@ function main(params) {
 
     if (!params.size) {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The parameter 'size' must be defined!"
@@ -47,7 +47,7 @@ function main(params) {
     }
     if (!params.sorts) {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The parameter 'sorts' must be defined!"
@@ -106,7 +106,7 @@ function main(params) {
 
         if (count > docsCount) {
             return {
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "message": "The number of docs to delete is " + count + ", but the docs in the database '" + db_selected + "' are " + docsCount
@@ -142,7 +142,7 @@ function main(params) {
         }).catch((error) => {
             console.log('Error: ' + error.message);
             return { 
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "error": error
@@ -152,7 +152,7 @@ function main(params) {
     }).catch((error) => {
         console.log('Error: ' + error.message);
         return { 
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "error": error

@@ -17,7 +17,7 @@ function main(args) {
         var parts = args.__ow_path.split('/');
         if (parts.length != 6) {
             return {
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "message": "The path must be: ../readBench/{dbname}/{query}"
@@ -29,7 +29,7 @@ function main(args) {
     }
     else {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The path must be: ../readBench/{dbname}/{query}"
@@ -73,7 +73,7 @@ function main(args) {
     }).catch((error) => {
         console.log('Error: ' + error.message);
         return { 
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "error": error

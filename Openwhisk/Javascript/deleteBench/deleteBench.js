@@ -17,7 +17,7 @@ function main(args) {
         var parts = args.__ow_path.split('/');
         if (parts.length != 5) {
             return {
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "message": "The path must be: ../deleteBench/{dbname}/{count}"
@@ -29,7 +29,7 @@ function main(args) {
     }
     else {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The path must be: ../deleteBench/{dbname}/{count}"
@@ -55,7 +55,7 @@ function main(args) {
 
         if (size > docsCount) {
             return {
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "message": "The number of docs to delete is " + size + ", but the docs in the database '" + db_selected + "' are " + docsCount
@@ -96,7 +96,7 @@ function main(args) {
         }).catch((error) => {
             console.log('Error: ' + error.message);
             return { 
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "error": error
@@ -106,7 +106,7 @@ function main(args) {
     }).catch((error) => {
         console.log('Error: ' + error.message);
         return { 
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "error": error

@@ -37,7 +37,7 @@ public class Main {
             path = args.getAsJsonPrimitive("__ow_path").getAsString();
             split = path.split("/");
             if (split.length != 4) {
-                response.addProperty("statusCode", 400);
+                response.addProperty("statusCode", 500);
                 response.add("headers", header);
                 bodyError.addProperty("message", "The path must be: ../createBenchJava/{dbname}");
                 response.add("body", bodyError);
@@ -56,7 +56,7 @@ public class Main {
             size = args.getAsJsonPrimitive("size").getAsInt();
         }
         else {
-            response.addProperty("statusCode", 400);
+            response.addProperty("statusCode", 500);
             response.add("headers", header);
             bodyError.addProperty("message", "The parameter 'size' must be defined!");
             response.add("body", bodyError);
@@ -67,7 +67,7 @@ public class Main {
             ndocs = args.getAsJsonPrimitive("ndocs").getAsInt();
         }
         else {
-            response.addProperty("statusCode", 400);
+            response.addProperty("statusCode", 500);
             response.add("headers", header);
             bodyError.addProperty("message", "The parameter 'ndocs' must be defined!");
             response.add("body", bodyError);
@@ -78,7 +78,7 @@ public class Main {
             sorts = args.getAsJsonPrimitive("sorts").getAsInt();
         }
         else {
-            response.addProperty("statusCode", 400);
+            response.addProperty("statusCode", 500);
             response.add("headers", header);
             bodyError.addProperty("message", "The parameter 'sorts' must be defined!");
             response.add("body", bodyError);

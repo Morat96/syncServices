@@ -1,7 +1,37 @@
 /**
- * Simple RSA decription algorithm
+ * Simple RSA decryption algorithm
  */
 function main(args) {
+
+    if (!args.n) {
+        return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                "message": "The parameter 'n' must be defined!"
+            }
+        };
+    }
+
+    if (!args.e) {
+        return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                "message": "The parameter 'e' must be defined!"
+            }
+        };
+    }
+
+    if (!args.cipher) {
+        return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                "message": "The parameter 'cipher' must be defined!"
+            }
+        };
+    }
 
     // arguments n, e, cipher
     var n_ = args.n || '';
@@ -52,11 +82,20 @@ function main(args) {
 
     //console.log("Original message " + originalMessage);
     
-    return {
+    var body = {
         'p': p.toString(),
         'q': q.toString(),
         'd': d.toString()
     };
+
+    return { 
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json' },
+        body: {
+            "response": body,
+            "time": end - start + ' ms'
+        }
+    }
 }
 
 //calculate multiplicative inverse of a%n using the extended euclidean GCD algorithm

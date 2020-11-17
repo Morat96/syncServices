@@ -16,7 +16,7 @@ function main(params) {
         var parts = params.__ow_path.split('/');
         if (parts.length != 4) {
             return {
-                statusCode: 400,
+                statusCode: 500,
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     "message": "The path must be: ../createBench/{dbname}"
@@ -27,7 +27,7 @@ function main(params) {
     }
     else {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The path must be: ../createBench/{dbname}"
@@ -37,7 +37,7 @@ function main(params) {
 
     if (!params.size) {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The parameter 'size' must be defined!"
@@ -46,7 +46,7 @@ function main(params) {
     }
     if (!params.ndocs) {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The parameter 'ndocs' must be defined!"
@@ -55,7 +55,7 @@ function main(params) {
     }
     if (!params.sorts) {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The parameter 'sorts' must be defined!"
@@ -126,7 +126,7 @@ function main(params) {
     }).catch((error) => {
         console.log('Error: ' + error.message);
         return { 
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "error": error

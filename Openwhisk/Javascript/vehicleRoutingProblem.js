@@ -11,7 +11,7 @@ function main(params) {
 
     if (!params.vns) {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "The parameter 'vns' must be defined!"
@@ -36,7 +36,7 @@ function main(params) {
     }
     else {
         return {
-            statusCode: 400,
+            statusCode: 500,
             headers: { 'Content-Type': 'application/json' },
             body: {
                 "message": "An instance of a Vehicle Routing Problem must be upload with a POST method."
