@@ -60,10 +60,9 @@ https://192.168.30.151:31001/api/23bc46b1-71f6-4ed5-8c54-816aa4f8c502/vrp/js
 ```
 ---
 ## Openwhisk IBM Functions
----
 ### Java
-#### RSA Decryption
 ---
+#### RSA Decryption
 ```
 https://service.eu.apiconnect.ibmcloud.com/gws/apigateway/api/f41ddfcced3ac2255a3c599ca51140bf9130534da8fcf791fb5c25a0e7d09f98/rsa/java
 ```
