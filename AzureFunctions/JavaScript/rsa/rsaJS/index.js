@@ -16,7 +16,7 @@ module.exports = async function (context, req) {
     if (!n_) {
         console.log("The private key n is not defined!");
         return context.res = {
-            status: 400,
+            status: 500,
             body: {
                 'Error': 'The private key n is not defined!'
             }
@@ -26,7 +26,7 @@ module.exports = async function (context, req) {
     if (!e_) {
         console.log("The private key e is not defined!");
         return context.res = {
-            status: 400,
+            status: 500,
             body: {
                 'Error': 'The private key e is not defined!'
             }
@@ -36,7 +36,7 @@ module.exports = async function (context, req) {
     if (!cipher_) {
         console.log("The cipher is not defined!");
         return context.res = {
-            status: 400,
+            status: 500,
             body: {
                 'Error': 'The cipher is not defined!'
             }
@@ -54,20 +54,20 @@ module.exports = async function (context, req) {
 
     console.log("Cripted Message: " + cipher);
 
-    var d = new Date();
-    var start = d.getTime();
+    var date = new Date();
+    var start = date.getTime();
 
     var factorization = tdFactors(n);
 
-    d = new Date();
-    var end = d.getTime();
+    date = new Date();
+    var end = date.getTime();
     console.log("Time for computing factorization: " + (end - start) + " ms");
 
     // check if N is a coprime number
     if (factorization.length != 2) {
         console.log("N is not coprime number!");
-        context.res = {
-            status: 400,
+        return context.res = {
+            status: 500,
             body: {
                 'Error': 'N is not coprime number!'
             }
@@ -92,13 +92,15 @@ module.exports = async function (context, req) {
 
     //console.log("Original message " + originalMessage);
 
-    context.res = {
+    var result = {
+        "p" : p.toString(),
+        "q" : q.toString(),
+        "d" : d.toString()
+    }
+
+    return context.res = {
         status: 200,
-        body: {
-            "p" : p.toString(),
-            "q" : q.toString(),
-            "d" : d.toString()
-        }
+        body: result
     };
 }
 

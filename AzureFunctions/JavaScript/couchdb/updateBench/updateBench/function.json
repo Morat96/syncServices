@@ -9,7 +9,7 @@
         "get",
         "put"
       ],
-      "route": "updateBench/{dbname:alpha}/{count:int}"
+      "route": "updateBenchJS/{dbname:alpha}/{count:int}"
     },
     {
       "type": "http",

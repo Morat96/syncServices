@@ -42,7 +42,7 @@ public class Function {
                 name = "req",
                 methods = {HttpMethod.GET, HttpMethod.POST},
                 authLevel = AuthorizationLevel.ANONYMOUS,
-                route = "updateBench/{dbname}/{count}")
+                route = "updateBenchJava/{dbname}/{count}")
                 HttpRequestMessage<Optional<String>> request,
                 @BindingName("dbname") String dbname,
                 @BindingName("count") Integer count,

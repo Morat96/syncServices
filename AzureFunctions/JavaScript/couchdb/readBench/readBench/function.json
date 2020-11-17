@@ -8,7 +8,7 @@
       "methods": [
         "get"
       ],
-      "route": "readBench/{dbname:alpha}/{query:alpha}"
+      "route": "readBenchJS/{dbname:alpha}/{query:alpha}"
     },
     {
       "type": "http",

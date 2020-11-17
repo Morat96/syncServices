@@ -32,7 +32,7 @@ import com.google.gson.JsonElement;
  */
 public class Function {
 
-    @FunctionName("vrpJava")
+    @FunctionName("vrp")
     public HttpResponseMessage run(
             @HttpTrigger(
                 name = "req",

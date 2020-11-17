@@ -36,7 +36,7 @@ import java.util.Collections;
 
 public class Function {
 
-    @FunctionName("HttpExample")
+    @FunctionName("deleteBench")
     public HttpResponseMessage run(
             @HttpTrigger(
                 name = "req",

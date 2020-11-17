@@ -21,7 +21,7 @@ import java.util.LinkedList;
 
 public class Function {
     
-    @FunctionName("rsaJava")
+    @FunctionName("rsa")
     public HttpResponseMessage run(
             @HttpTrigger(
                 name = "req",

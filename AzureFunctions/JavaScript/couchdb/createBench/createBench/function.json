@@ -9,7 +9,7 @@
         "get",
         "post"
       ],
-      "route": "createBench/{dbname:alpha}"
+      "route": "createBenchJS/{dbname:alpha}"
     },
     {
       "type": "http",

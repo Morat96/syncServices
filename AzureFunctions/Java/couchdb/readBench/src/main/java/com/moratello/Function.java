@@ -43,7 +43,7 @@ public class Function {
                 name = "req",
                 methods = {HttpMethod.GET, HttpMethod.POST},
                 authLevel = AuthorizationLevel.ANONYMOUS,
-                route = "readBench/{dbname}/{query}")
+                route = "readBenchJava/{dbname}/{query}")
                 HttpRequestMessage<Optional<String>> request,
                 @BindingName("dbname") String dbname,
                 @BindingName("query") String query,

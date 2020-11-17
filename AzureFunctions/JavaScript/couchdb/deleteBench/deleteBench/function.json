@@ -9,7 +9,7 @@
         "get",
         "delete"
       ],
-      "route": "deleteBench/{dbname:alpha}/{count:int}"
+      "route": "deleteBenchJS/{dbname:alpha}/{count:int}"
     },
     {
       "type": "http",
