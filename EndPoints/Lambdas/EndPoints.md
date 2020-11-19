@@ -1,4 +1,4 @@
-# OpenWhisk Local Synclab
+# Amazon Lambdas
 ## Java
 ### RSA Decryption
 ```
