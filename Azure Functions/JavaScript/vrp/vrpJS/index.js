@@ -48,7 +48,7 @@ module.exports = async function (context, req) {
 
     var fs = require('fs');
 
-    fs.writeFileSync('instance.txt', content);
+    fs.writeFileSync('D:/local/Temp/instance.txt', content);
 
     var nodes = 0;
     var capacity = 0;
@@ -64,7 +64,7 @@ module.exports = async function (context, req) {
 
     var customers = ([]);
 
-    var file = fs.readFileSync('instance.txt').toString().split("\n");
+    var file = fs.readFileSync('D:/local/Temp/instance.txt').toString().split("\n");
 
     file.forEach(lines => {
         var line = lines.trim().replace( /\r/, " " ).split(" ");

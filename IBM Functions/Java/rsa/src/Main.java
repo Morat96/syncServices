@@ -39,10 +39,19 @@ public class Main {
         // response
         JsonObject response = new JsonObject();
 
+        JsonObject header = new JsonObject();
+        
+        header.addProperty("Content-Type", "application/json");
+
+        JsonObject body = new JsonObject();
+
         // check if N is a coprime number
         if (factorization.size() != 2) {
             System.out.println("N is not coprime number!");
-            response.addProperty("Error", "N is not coprime number!");
+            response.addProperty("statusCode", 400);
+            response.add("headers", header);
+            body.addProperty("Error", "N is not coprime number!");
+            response.add("body", body);
             return response;
         }
 
@@ -64,9 +73,14 @@ public class Main {
 
         System.out.println("Original Message: " + originalMessage);
 
-        response.addProperty("p", p);
-        response.addProperty("q", q);
-        response.addProperty("Original Message", originalMessage);
+        response.addProperty("statusCode", 200);
+        response.add("headers", header);
+
+        body.addProperty("p", p);
+        body.addProperty("q", q);
+        body.addProperty("Original Message", originalMessage);
+
+        response.add("body", body);
 
         return response;
 

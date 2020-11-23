@@ -61,7 +61,13 @@ function main(args) {
     // check if N is a coprime number
     if (factorization.length != 2) {
         console.log("N is not coprime number!");
-        return {'Error': 'N is not coprime number!'};
+        return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                "message": "N is not coprime number!"
+            }
+        };
     }
 
     var p = factorization[0];
