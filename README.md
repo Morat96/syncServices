@@ -9,13 +9,13 @@
 
 For each platform, the folders present are the following:
 - <b>Java</b>
- - RSA Decryption;
- - CRUD benchmark;
- - Vehicle Routing Problem.
+  - RSA Decryption;
+  - CRUD benchmark;
+  - Vehicle Routing Problem.
 - <b>NodeJS</b>
- - RSA Decryption;
- - CRUD benchmark;
- - Vehicle Routing Problem.
+  - RSA Decryption;
+  - CRUD benchmark;
+  - Vehicle Routing Problem.
 
 ## Algorithms
 
